@@ -42,57 +42,57 @@ domain = ['co.in','co.uk','in','pk','co.pk','co.org','org','com','uk','bd','net'
                         'net', 'org', 'biz', 'gov', 'mil', 'edu', 'info', 'int', 'tel']
 
 def bing(dork):
-	okkk = dork
-	first = 0
-	try:
-		for i in range(int(page1)):
-			first = first+50
-			params = {'q': okkk, 'count': '1000','first':first}
-			get = urlencode(params)
-			url = "http://www.bing.com/search?"+get
-			url = request.Request(url,None,headers=headers)
-			result = request.urlopen(url,timeout=10)
-			result = result.read().decode('utf-8')
-			patern = r'<h2><a href="(.*?)"'
-			ok = re.findall(patern,result)
-			for i in ok:
-				i = i.replace("<strong>","")
-				i = i.replace("</strong>","")
-				i = i.replace("http://","")
-				i = i.replace("https://","")
-				i = i.replace("www.","")
-				i = i.split("/")
-				i = i[0]
-				check(i)
-				#ip(i)						
-	except Exception as e:
-		print(e)
-		bing(dork)
+    okkk = dork
+    first = 0
+    print("Checking Dork: "+dork)
+    try:
+        for i in range(int(page1)):
+            first = first+50
+            params = {'q': okkk, 'count': '1000','first':first}
+            get = urlencode(params)
+            url = "http://www.bing.com/search?"+get
+            url = request.Request(url,None,headers=headers)
+            result = request.urlopen(url,timeout=10)
+            result = result.read().decode('utf-8')
+            patern = r'<h2><a href="(.*?)"'
+            ok = re.findall(patern,result)
+            for i in ok:
+                i = i.replace("<strong>","")
+                i = i.replace("</strong>","")
+                i = i.replace("http://","")
+                i = i.replace("https://","")
+                i = i.replace("www.","")
+                i = i.split("/")
+                i = i[0]
+                check(i)
+    except Exception as e:
+        print(e)
+        bing(dork)
+
 def check(url):
-	pdf = ".pdf"
-	string = "." in url
-	try:
-		file = open(filename,"r").read()
-	except:
-		open(filename,"w")
-		file = open(filename,"r").read()
-	if url in file or pdf in url or string == False:
-			print(la7mar+" [+] Already Exists: "+url+labyadh)
-	else:
-		file = open(filename,"a")
-		file.write(url+"\n")
-		file.close()
-		print(la5dhar+" [+] Added: "+url+labyadh)
+    pdf = ".pdf"
+    string = "." in url
+    try:
+        file = open(filename,"r").read()
+    except:
+        open(filename,"w")
+        file = open(filename,"r").read()
+        if url in file or pdf in url or "facebook" in url or "google" in url or "bing" in url or "twitter" in url or string == False:
+            fuck = fuck
+        else:
+            file = open(filename,"a")
+            file.write(url+"\n")
+            file.close()
 try:
-	dorks = "dork.txt"
-	page1 = 500
-	filename = "list.txt"
-	dork = open(dorks,"r").read().splitlines()
+    dorks = "dork.txt"
+    page1 = 100
+    filename = "list.txt"
+    dork = open(dorks,"r").read().splitlines()
 except Exception as e:
 	print(e)
 	exit()
 try:
-	with concurrent.futures.ThreadPoolExecutor(200) as executor:
-		executor.map(bing,dork)
+    with concurrent.futures.ThreadPoolExecutor(150) as executor:
+        executor.map(bing,dork)
 except Exception as e:
-	print(e)
+    print(e)
