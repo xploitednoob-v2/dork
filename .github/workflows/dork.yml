@@ -12,9 +12,9 @@ jobs:
     steps:
     - name: Clone repository
       uses: actions/checkout@v2
-    - name: BruteForce
+    - name: Dork
       run: |
-        python3 main.txty
+        python3 main.py
     - name: Result
       uses: actions/upload-artifact@v1
       with:
